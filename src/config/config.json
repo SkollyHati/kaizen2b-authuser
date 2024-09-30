@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "root",
+    "password": "root_1234",
+    "database": "kaizenbi-users",
+    "host": "localhost",
+    "dialect": "mysql",
+    "port":"3307"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "kaizenbi-users",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "kaizenbi-users",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
