@@ -6,7 +6,7 @@ const http = require('http');
 const app = express();
 
 routerApi(app);
-app.use("/swagger", require("./src/routes/api-doc"));
+app.use("/swagger", require("./src/swagger/api-doc"));
 app.use(express.json());
 app.use(logger('dev'));
 /*

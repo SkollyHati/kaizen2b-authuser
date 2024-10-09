@@ -10,12 +10,12 @@ const swaggerOptions = {
     openapi: '3.1.0',
     info:{
       version: "1.0.0",
-      title: "AuthUser - Security Documentation",
+      title: "Users - Auth and Security Documentation",
       contact:{
         name:"Lucas Ismael Gutierrez",
         url:"https://www.linkedin.com/in/lucas-gutierrez-856b49100/"
       },
-      servers:["http://localhost:3005"]
+     // servers:["http://localhost:3005"]
     }
   }, basePath: "/",
   apis: ["./src/routes/*.js"],

@@ -17,7 +17,7 @@ module.exports = {
         }
       },
       status: {
-        type: Sequelize.CHAR
+        type: Sequelize.TINYINT(1)
       },
       token: {
         type: Sequelize.STRING

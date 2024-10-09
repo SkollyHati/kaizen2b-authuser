@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   userTokens.init({
     user_id: DataTypes.INTEGER,
-    status: DataTypes.CHAR,
+    status: DataTypes.TINYINT(1),
     token: DataTypes.STRING
   }, {
     sequelize,

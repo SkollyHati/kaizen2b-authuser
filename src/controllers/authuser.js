@@ -5,6 +5,7 @@ var  UserRoles  = require('../models').userRoles;
 var  Roles  = require('../models').roles;
 var  Security = require('../middleware/security');
 
+
 // Authenticate user
 async function authuser(req, res){
   try {
@@ -23,13 +24,26 @@ async function authuser(req, res){
      const rolesUsuario = await UserRoles.findOne({where: {user_id: usuario.id}})
 
      const roles = await Roles.findOne({where: {id: rolesUsuario.role_id}})
+     console.log(roles);
 
-    var token = Security.generate(usuario.id,usuario.username,roles.code);
+    var token =   Security.generate(usuario.id,usuario.username,roles.code);
       return res.status(200).json({ token });
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });
   }
 }
 
+async function verifyToken(req, res){
+  try {
+    if (!req.body.token) {
+      return res.status(400).json({ message: "Token not provided" });
+    }
+    Security.authenticated(req,res);
 
-module.exports = {authuser}
+  } catch (error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+
+module.exports = {authuser, verifyToken}

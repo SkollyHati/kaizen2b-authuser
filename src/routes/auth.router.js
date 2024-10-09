@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Sequelize     = require('sequelize');
+var  User  = require('../models').users;
 const Op            = Sequelize.Op;
 const Controller = require('../controllers/authuser');
 router.use(express.json());
@@ -48,23 +49,6 @@ router.post('/login', async (req,res) => {
 /**
  * @swagger
  *
- * /getById:
- *   get:
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: Id
- *         in: formData
- *         required: false
- *         type: string
- */
-router.get('/getById/:id', (req,res) => {
-   return User.findOne({where: {id: parseInt(req.params.id)}}).then(usuario => res.status(200).send(usuario));
-})
-
-/**
- * @swagger
- *
  * /refresh:
  *   get:
  *     produces:
@@ -75,9 +59,9 @@ router.get('/getById/:id', (req,res) => {
  *         required: true
  *         type: string
  */
-router.get('/refresh', (req,res) => {
-  res.send('refreshToken');
-})
+router.get("/verifyToken", async (req, res) => {
+  return await Controller.verifyToken(req,res);
+});
 
 
 module.exports = router;

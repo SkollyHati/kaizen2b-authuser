@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   userRoles.init({
     user_id: DataTypes.INTEGER,
-    status: DataTypes.CHAR,
+    status: DataTypes.TINYINT(1),
     role_id: DataTypes.INTEGER
   }, {
     sequelize,
