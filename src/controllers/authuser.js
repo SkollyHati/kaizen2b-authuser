@@ -1,32 +1,26 @@
 'use strict'
 
-var  User  = require('../models').users;
-var  UserRoles  = require('../models').userRoles;
-var  Roles  = require('../models').roles;
-var  Security = require('../middleware/security');
-
+const Security = require('../middleware/security');
+const UserRepository = require('../repositories/usersRepository');
+const bcrypt = require('bcrypt');
 
 // Authenticate user
 async function authuser(req, res){
   try {
+    let validPassword="";
     if (!req.body.username || !req.body.password) {
       return res.status(400).json({ message: "Usuario y clave son requeridos" });
     }
-    const usuario = await User.findOne({where: {username: req.body.username }});
+    const usuario = await UserRepository.getUserByName(req.body.username);
     if (!usuario) {
       return res.status(400).json({ message: "Usuario o clave inválidos" });
     }
-
-    if(usuario.password !== req.body.password){
+    await correctPassword(req.body.password, usuario.usuario.password).then(valid => validPassword=valid)
+    if(!validPassword){
       return res.status(400).json({ message: "Clave incorrecta" });
     }
 
-     const rolesUsuario = await UserRoles.findOne({where: {user_id: usuario.id}})
-
-     const roles = await Roles.findOne({where: {id: rolesUsuario.role_id}})
-     console.log(roles);
-
-    var token =   Security.generate(usuario.id,usuario.username,roles.code);
+    var token =   Security.generate( usuario.usuario.id, usuario.usuario.username, usuario.roles);
       return res.status(200).json({ token });
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });
@@ -45,5 +39,12 @@ async function verifyToken(req, res){
   }
 }
 
+const correctPassword = (enteredPassword, originalPassword) => {
+  return new Promise(resolve => {
+    bcrypt.compare(enteredPassword, originalPassword, (err, res) =>{
+      resolve(res)
+    });
+  })
+}
 
 module.exports = {authuser, verifyToken}

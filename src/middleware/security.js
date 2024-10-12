@@ -2,6 +2,8 @@
 const jwt = require("jsonwebtoken");
 const secretKey = 'clave_secreta_';
 
+
+
 function verify (token) {
     try {
      return jwt.verify(token, secretKey);

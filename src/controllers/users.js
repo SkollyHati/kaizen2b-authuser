@@ -1,13 +1,5 @@
-'use strict'
 
-var  User  = require('../models').users;
-var  UserRoles  = require('../models').userRoles;
-var  Roles  = require('../models').roles;
-var  Security = require('../middleware/security');
-const Sequelize     = require('sequelize');
-const Op            = Sequelize.Op;
-
-// Authenticate user
+// Users Logic
 async function getUsers(req, res){
   try {
     let userlist = await User.findAll();
@@ -34,6 +26,10 @@ async function getUserById(req, res){
 
 async function updateUser(req, res){
   try {
+    const usuario = await User.findOne({where: {id: req.params.id }});
+    const newpassword = "Abzcde";
+    usuario.password = newpassword;
+    await usuario.save();
     return res.status(200).json({message: "User update"})
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });
@@ -64,5 +60,9 @@ async function deleteBulkUsers(req, res){
   }
 }
 
+//
+async function getUserByName(username){
 
-module.exports = {createUser,getUsers, getUserById, updateUser, updateBulkUsers, deleteUser, deleteBulkUsers}
+}
+
+module.exports = {createUser,getUsers, getUserById, updateUser, updateBulkUsers, deleteUser, deleteBulkUsers, getUserByName}

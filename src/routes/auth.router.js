@@ -49,17 +49,27 @@ router.post('/login', async (req,res) => {
 /**
  * @swagger
  *
- * /refresh:
- *   get:
+ * /api/v1/auth/verifyToken:
+ *   post:
  *     produces:
  *       - application/json
- *     parameters:
- *       - name: username
- *         in: formData
- *         required: true
- *         type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *            schema:
+ *                type: object
+ *                properties:
+ *                   token: string
+ *
+ *     responses:
+ *       "200":
+ *         description: Ok
+ *       "400":
+ *         description: Invalid Token
+ *
  */
-router.get("/verifyToken", async (req, res) => {
+router.post("/verifyToken", async (req, res) => {
   return await Controller.verifyToken(req,res);
 });
 
