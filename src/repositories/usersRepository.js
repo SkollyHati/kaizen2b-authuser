@@ -21,7 +21,7 @@ return userDTO;
 
 const getUserByName = async (data) =>
   {
-
+    try{
     var u = await User.findOne({where: {username: data }});
     var ur = await getUserRoles(u.id);
     var r = await getRoles(ur);
@@ -31,6 +31,10 @@ const getUserByName = async (data) =>
     }
 
   return userDTO;
+    }
+    catch {
+      return null;
+    }
   };
 
 const getUsers = async () =>

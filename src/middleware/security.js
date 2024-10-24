@@ -41,5 +41,10 @@ module.exports = {
             }else  return res.status(400).json({succes: false, message: 'Invalid Token'});
           }
     }
+ },
+ decodeToken: function(req){
+            var token = req.headers.authorization.split(" ")[1];
+            var payload = verify(token);
+            return payload;
  }
 }

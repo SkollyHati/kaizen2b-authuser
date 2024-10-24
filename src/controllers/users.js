@@ -1,4 +1,4 @@
-
+var  Security = require('../middleware/security');
 // Users Logic
 async function getUsers(req, res){
   try {
@@ -23,6 +23,15 @@ async function getUserById(req, res){
     return res.status(500).json({ message: "Internal server error" });
   }
 }
+
+async function getUserLogged(req, res){
+  try{
+    var decoded = Security.decodeToken(req,res);
+      } catch (e) {
+          return res.status(401).send('unauthorized');
+      }
+      return  res.status(200).json(decoded);
+  }
 
 async function updateUser(req, res){
   try {
@@ -65,4 +74,4 @@ async function getUserByName(username){
 
 }
 
-module.exports = {createUser,getUsers, getUserById, updateUser, updateBulkUsers, deleteUser, deleteBulkUsers, getUserByName}
+module.exports = {createUser, getUsers, getUserLogged, getUserById, updateUser, updateBulkUsers, deleteUser, deleteBulkUsers, getUserByName}

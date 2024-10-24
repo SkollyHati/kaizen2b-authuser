@@ -5,8 +5,13 @@ var  Security = require('../middleware/security');
 router.use(express.json());
 
 
-router.get('/', Security.authenticated, async (req,res) => {
+router.get('/all', Security.authenticated, async (req,res) => {
    return await Controller.getUsers(req,res);
+});
+
+
+router.get('/userLogged', Security.authenticated, async (req,res) => {
+  return await Controller.getUserLogged(req,res);
 });
 
 router.get('/:id', Security.authenticated, async (req,res) => {
