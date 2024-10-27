@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "root_1234",
+    "password": "Helvetios1101",
     "database": "kaizenbi-users",
     "host": "localhost",
     "dialect": "mysql",

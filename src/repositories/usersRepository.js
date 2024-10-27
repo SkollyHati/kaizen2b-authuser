@@ -37,6 +37,36 @@ const getUserByName = async (data) =>
     }
   };
 
+
+const getUserByCUIT = async (data) =>
+  {
+    try{
+    var u = await User.findOne({where: {cuit: data }});
+    var ur = await getUserRoles(u.id);
+    var r = await getRoles(ur);
+    var userDTO = {
+      usuario: u,
+      roles: r
+    }
+
+  return userDTO;
+    }
+    catch {
+      return null;
+    }
+  };
+
+  const createUser = async (newUser) =>
+    {
+      try{
+       return User.create(newUser);
+
+      }
+      catch(e) {
+        return null;
+      }
+    }
+
 const getUsers = async () =>
     {
       return User.findAll()
@@ -69,4 +99,4 @@ const updateUserPassword = async (data) => {
 }
 
 
-module.exports = {updateUserPassword, updateUser, getUsers, getUserByName, getUserById}
+module.exports = {updateUserPassword, updateUser, getUsers, getUserByCUIT, getUserByName, createUser, getUserById}

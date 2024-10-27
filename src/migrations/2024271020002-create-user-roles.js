@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('userRoles', {
+    await queryInterface.createTable('User_Roles', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'users',
+          model: 'Users',
           key: 'id',
         }
       },
@@ -23,7 +23,7 @@ module.exports = {
       role_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'roles',
+          model: 'Roles',
           key: 'id',
         }
       },
@@ -32,7 +32,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       }
     });

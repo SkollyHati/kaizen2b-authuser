@@ -22,7 +22,7 @@ router.put('/:id', Security.authenticated, async (req,res) => {
   return await Controller.updateUser(req,res);
 });
 
-router.post('/:id', Security.authenticated, async (req,res) => {
+router.post('/', Security.authenticated, async (req,res) => {
   return await Controller.createUser(req,res);
 });
 

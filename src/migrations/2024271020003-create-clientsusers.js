@@ -2,37 +2,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('userTokens', {
+    await queryInterface.createTable('Clients', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'users',
-          key: 'id',
-        }
-      },
       status: {
         type: Sequelize.TINYINT(1)
       },
-      token: {
+      client_name: {
+        type: Sequelize.STRING
+      },
+      client_cuil: {
         type: Sequelize.STRING
       },
       createdAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
-      }
+      },
+      client_hash: {
+        type: DataTypes.UUID.V4,
+        defaultValue: sql.uuidv4,
+        allowNull:false}
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('userTokens');
+    await queryInterface.dropTable('clientsusers');
   }
 };

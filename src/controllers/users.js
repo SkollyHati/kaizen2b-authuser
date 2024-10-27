@@ -1,4 +1,5 @@
 var  Security = require('../middleware/security');
+const UserRepository = require('../repositories/usersRepository');
 // Users Logic
 async function getUsers(req, res){
   try {
@@ -10,7 +11,20 @@ async function getUsers(req, res){
 }
 async function createUser(req, res){
   try {
-    return res.status(200).json({message: "Delete bulk users"})
+    const userbyuname = validateUser(data= {username: req.body.username })
+    if (userbyuname){
+
+      return  res.status(400).json({ message: "Ya existe un usuario con el correo que desea ingresar" })
+    }
+    const userbycuit = validateUser(data= {cuit: req.body.cuit})
+    if (userbycuit)
+    {
+      return  res.status(400).json({ message: "Ya existe un usuario con el CUIT que desea ingresar" });
+    }
+    else
+    {
+      return UserRepository.createUser(req);
+    }
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });
   }
@@ -70,7 +84,15 @@ async function deleteBulkUsers(req, res){
 }
 
 //
-async function getUserByName(username){
+async function validateUser(data){
+  try {
+    if (data.username)return UserRepository.getUserByName(req.body.username);
+    if (data.cuit) return UserRepository.getyUserByCUIT(req.body.cuit);
+    else return null;
+  }
+  catch(e){
+    return null;
+  }
 
 }
 
