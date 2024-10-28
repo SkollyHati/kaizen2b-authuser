@@ -96,4 +96,4 @@ async function validateUser(data){
 
 }
 
-module.exports = {createUser, getUsers, getUserLogged, getUserById, updateUser, updateBulkUsers, deleteUser, deleteBulkUsers, getUserByName}
+module.exports = {createUser, getUsers, getUserLogged, getUserById, updateUser, updateBulkUsers, deleteUser, deleteBulkUsers}

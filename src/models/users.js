@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
 
     static associate(models) {
-      Users.belongsTo(models.clients, {
+      Users.belongsTo(models.Clients, {
         as: 'Clients',
         foreignKey: 'client_id'
       })
@@ -22,9 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     lastname: {type: DataTypes.STRING, allowNull: false},
     cuil: {type: DataTypes.STRING(11), primaryKey: true},
     email: {type: DataTypes.STRING, allowNull: false},
+    gender: {type:DataTypes.STRING.BINARY},
     status: DataTypes.TINYINT(1),
     password: {type: DataTypes.STRING, allowNull: false},
-    user_hash: {type: DataTypes.UUID.V4, defaultValue: sql.uuidv4}
+    user_hash: {type: DataTypes.UUIDV4, defaultValue: DataTypes.UUIDV4}
   }, {
     sequelize,
     modelName: 'Users',

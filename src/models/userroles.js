@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  userRoles.init({
+  UserRoles.init({
     status: DataTypes.TINYINT(1),
   }, {
     sequelize,

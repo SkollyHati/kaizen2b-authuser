@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Helvetios1101",
+    "password": "root_1234",
     "database": "kaizenbi-users",
     "host": "localhost",
     "port":3307,

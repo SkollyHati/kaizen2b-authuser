@@ -12,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Clients.init({
     id: {type: DataTypes.INTEGER, autoIncrement: true},
-    client_name: {type: DataTypes.STRING, allowNull: false},
-    client_cuil: {type: DataTypes.STRING, primaryKey: true,allowNull: false},
+    company_name: {type: DataTypes.STRING, allowNull: false},
+    cuit: {type: DataTypes.STRING, primaryKey: true,allowNull: false},
     status: DataTypes.TINYINT(1),
-    client_hash: {type: DataTypes.UUID.V4, defaultValue: sql.uuidv4, allowNull:false}
+    client_hash: {type: DataTypes.UUIDV4, defaultValue: DataTypes.UUIDV4}
   }, {
     sequelize,
     modelName: 'Clients',

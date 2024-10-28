@@ -12,10 +12,10 @@ module.exports = {
       status: {
         type: Sequelize.TINYINT(1)
       },
-      client_name: {
+      company_name: {
         type: Sequelize.STRING
       },
-      client_cuil: {
+      cuit: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -27,8 +27,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       client_hash: {
-        type: DataTypes.UUID.V4,
-        defaultValue: sql.uuidv4,
+        type:Sequelize.STRING,
         allowNull:false}
     });
   },

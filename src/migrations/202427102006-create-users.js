@@ -6,7 +6,8 @@ module.exports = {
       id: {
         allowNull: false,
         autoIncrement: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        primaryKey: true
       },
       username: {
         type: Sequelize.STRING
@@ -18,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       cuil: {
-        primaryKey: true,
+
         type: Sequelize.STRING
       },
       email: {
@@ -30,6 +31,9 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      gender: {
+        type: Sequelize.STRING.BINARY
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -38,9 +42,16 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
+      client_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Clients',
+          key: 'id',
+        }
+      },
       user_hash:
-      {type: DataTypes.UUID.V4,
-       defaultValue: sql.uuidv4,
+      {type: Sequelize.STRING,
        allowNull:false}
     });
   },

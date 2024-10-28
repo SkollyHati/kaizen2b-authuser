@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Sequelize     = require('sequelize');
-var  User  = require('../models').users;
 const Op            = Sequelize.Op;
 const Controller = require('../controllers/authuser');
 router.use(express.json());
