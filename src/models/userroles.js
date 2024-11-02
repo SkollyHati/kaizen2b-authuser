@@ -15,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   UserRoles.init({
     status: DataTypes.TINYINT(1),
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
   }, {
     sequelize,
     modelName: 'User_Roles',

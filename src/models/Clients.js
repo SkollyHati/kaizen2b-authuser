@@ -7,18 +7,25 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      Clients.hasMany(models.Users);
+      Clients.hasMany(models.Users,{foreignKey: 'client_id'});
     }
   }
   Clients.init({
-    id: {type: DataTypes.INTEGER, autoIncrement: true},
+    id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
     company_name: {type: DataTypes.STRING, allowNull: false},
-    cuit: {type: DataTypes.STRING, primaryKey: true,allowNull: false},
+    cuit: {type: DataTypes.STRING,allowNull: false},
     status: DataTypes.TINYINT(1),
-    client_hash: {type: DataTypes.UUIDV4, defaultValue: DataTypes.UUIDV4}
+    client_hash: {type: DataTypes.STRING, allowNull: true}
   }, {
     sequelize,
     modelName: 'Clients',
   });
+
+  Clients.beforeCreate((client) => {
+    {
+      client.client_hash = bcrypt.hashSync(client.client_hash, bcrypt.genSaltSync(10), null);
+    }
+});
+
   return Clients;
 };

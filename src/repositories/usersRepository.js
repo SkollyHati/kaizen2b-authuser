@@ -1,25 +1,26 @@
 'use strict'
 const  User  = require('../models').Users;
+const Roles = require('../models').Roles;
+const Clients = require('../models').Clients;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 
 const getUserById = async (data) =>
 {
-  var userDTO = {
-    usuario: u,
-    roles: r
+  try{
+  return await User.findOne({where: {id: data }, include: [{model:Roles, as:'Roles'},  {model:Clients, as: 'Clients'}]})
   }
-
-return userDTO;
+catch (e){
+  console.log(e);
+  return null}
 };
 
 const getUserByName = async (data) =>
   {
     try{
 
-
-  return userDTO;
+      return await User.findOne({where: {cuit: data }, include: Roles, include: Clients})
     }
     catch {
       return null;

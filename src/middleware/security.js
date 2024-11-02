@@ -31,14 +31,14 @@ module.exports = {
             if(payload){
             req.user = payload;
             next();
-          }else  return res.status(400).json({succes: false, message: 'Invalid Token'});
+          }else  return res.status(401).json({succes: false, message: 'Invalid Token'});
          }
         else {
             var payload = verify(req.body.token);
             if(payload) {
             req.user = payload;
             return res.status(200).json({succes: true, message: 'Ok'});
-            }else  return res.status(400).json({succes: false, message: 'Invalid Token'});
+            }else  return res.status(401).json({succes: false, message: 'Invalid Token'});
           }
     }
  },

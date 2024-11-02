@@ -14,7 +14,7 @@ router.get('/userLogged', Security.authenticated, async (req,res) => {
   return await Controller.getUserLogged(req,res);
 });
 
-router.get('/:id', Security.authenticated, async (req,res) => {
+router.get('/:id', /*Security.authenticated,*/ async (req,res) => {
   return await Controller.getUserById(req,res);
 });
 

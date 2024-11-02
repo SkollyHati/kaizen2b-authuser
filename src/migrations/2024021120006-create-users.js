@@ -39,7 +39,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       },
       client_id: {
@@ -51,8 +51,7 @@ module.exports = {
         }
       },
       user_hash:
-      {type: Sequelize.STRING,
-       allowNull:false}
+      {allowNull: true,type: Sequelize.STRING}
     });
   },
   async down(queryInterface, Sequelize) {

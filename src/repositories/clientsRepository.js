@@ -6,48 +6,24 @@ const Op = Sequelize.Op;
 
 const getClientById = async (data) =>
 {
-  var u = await Client.findOne({where: {Clientname: data }});
-  var ur = await getClientRoles(u.id);
-  var r = await getRoles(ur);
-  var ClientDTO = {
-    usuario: u,
-    roles: r
+  try {
+  return await Client.findOne({where: {Clientname: data }});
   }
-
-return ClientDTO;
+  catch {
+    return null;
+  }
 };
 
 const getClientByName = async (data) =>
   {
-    try{
-    var u = await Client.findOne({where: {Clientname: data }});
-    var ur = await getClientRoles(u.id);
-    var r = await getRoles(ur);
-    var ClientDTO = {
-      usuario: u,
-      roles: r
-    }
-
-  return ClientDTO;
-    }
-    catch {
-      return null;
-    }
-  };
+   return await Client.findOne({where: {Clientname: data }});
+  }
 
 
 const getClientByCUIT = async (data) =>
   {
     try{
-    var u = await Client.findOne({where: {cuit: data }});
-    var ur = await getClientRoles(u.id);
-    var r = await getRoles(ur);
-    var ClientDTO = {
-      usuario: u,
-      roles: r
-    }
-
-  return ClientDTO;
+    return await Client.findOne({where: {cuit: data }});
     }
     catch {
       return null;

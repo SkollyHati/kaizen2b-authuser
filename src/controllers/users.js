@@ -32,7 +32,11 @@ async function createUser(req, res){
 
 async function getUserById(req, res){
   try {
-    return User.findOne({where: {id: parseInt(req.params.id)}}).then(usuario => res.status(200).send(usuario))
+    const user = await UserRepository.getUserById(req.params.id);
+    if (!user){
+      return  res.status(400).json({ message: "Usuario no encontrado" });
+    }
+    else return res.status(200).json(user);
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });
   }
