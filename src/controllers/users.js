@@ -45,10 +45,11 @@ async function getUserById(req, res){
 async function getUserLogged(req, res){
   try{
     var decoded = Security.decodeToken(req,res);
+    var user = await UserRepository.getUserById(decoded.userid);
       } catch (e) {
           return res.status(401).send('unauthorized');
       }
-      return  res.status(200).json(decoded);
+      return  res.status(200).json(user);
   }
 
 async function updateUser(req, res){

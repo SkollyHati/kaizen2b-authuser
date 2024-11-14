@@ -15,12 +15,12 @@ async function authuser(req, res){
     if (!usuario) {
       return res.status(400).json({ message: "Usuario o clave inválidos" });
     }
-    await correctPassword(req.body.password, usuario.usuario.password).then(valid => validPassword=valid)
+    await correctPassword(req.body.password, usuario.password).then(valid => validPassword=valid)
     if(!validPassword){
       return res.status(400).json({ message: "Clave incorrecta" });
     }
 
-    var token =   Security.generate( usuario.usuario.id, usuario.usuario.username, usuario.roles);
+    var token =   Security.generate( usuario.id, usuario.username, usuario.role);
       return res.status(200).json({ token });
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });

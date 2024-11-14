@@ -16,8 +16,12 @@ function verify (token) {
 module.exports = {
 
   generate: function(userid,username,role) {
-    var token = jwt.sign({ userid: userid, username: username, role:role }, secretKey,{ expiresIn: "1h" });
+    try {
+      var token = jwt.sign({ userid: userid, username: username, role:role}, secretKey,{ expiresIn: "1h" });
     return token;
+  }catch(e){
+    return res.status(500).send({message: "Error de servicio"});
+  }
   },
 
   authenticated: function (req, res, next){

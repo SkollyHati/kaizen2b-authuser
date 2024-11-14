@@ -9,21 +9,54 @@ const Op = Sequelize.Op;
 const getUserById = async (data) =>
 {
   try{
-  return await User.findOne({where: {id: data }, include: [{model:Roles, as:'Roles'},  {model:Clients, as: 'Clients'}]})
+   let userfind = await User.findOne({where: {id: data }, include: [{model:Roles, as:'Roles'},  {model:Clients, as: 'Clients'}]});
+
+   let response = {
+    id: userfind.id,
+    username: userfind.username,
+    firstname: userfind.firstname,
+    lastname: userfind.lastname,
+    cuil: userfind.cuil,
+    client: {
+      id: userfind.Clients.id,
+      company_name: userfind.Clients.company_name,
+      company_cuit: userfind.Clients.cuit
+    },
+    role: userfind.Roles[0].code
+   }
+   return response;
   }
 catch (e){
   console.log(e);
-  return null}
+  return null
+}
 };
 
 const getUserByName = async (data) =>
   {
     try{
 
-      return await User.findOne({where: {cuit: data }, include: Roles, include: Clients})
+      let userfind = await User.findOne({where: {username: data }, include: [{model:Roles, as:'Roles'},  {model:Clients, as: 'Clients'}]});
+
+      let response = {
+        id: userfind.id,
+        username: userfind.username,
+        firstname: userfind.firstname,
+        lastname: userfind.lastname,
+        cuil: userfind.cuil,
+        password: userfind.password,
+        client: {
+          id: userfind.Clients.id,
+          company_name: userfind.Clients.company_name,
+          company_cuit: userfind.Clients.cuit
+        },
+        role: userfind.Roles[0].code
+       }
+
+       return response;
     }
-    catch {
-      return null;
+    catch(e) {
+      throw(e);
     }
   };
 
@@ -31,18 +64,27 @@ const getUserByName = async (data) =>
 const getUserByCUIT = async (data) =>
   {
     try{
-    var u = await User.findOne({where: {cuit: data }});
-    var ur = await getUserRoles(u.id);
-    var r = await getRoles(ur);
-    var userDTO = {
-      usuario: u,
-      roles: r
-    }
 
-  return userDTO;
+      let userfind = await User.findOne({where: {cuil: data }, include: [{model:Roles, as:'Roles'},  {model:Clients, as: 'Clients'}]});
+
+      let response = {
+        id: userfind.id,
+        username: userfind.username,
+        firstname: userfind.firstname,
+        lastname: userfind.lastname,
+        cuil: userfind.cuil,
+        client: {
+          id: userfind.Clients.id,
+          company_name: userfind.Clients.company_name,
+          company_cuit: userfind.Clients.cuit
+        },
+        role: userfind.Roles[0].code
+       }
+
+       return response;
     }
-    catch {
-      return null;
+    catch(e) {
+      throw(e);
     }
   };
 

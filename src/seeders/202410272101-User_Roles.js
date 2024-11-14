@@ -7,8 +7,8 @@ module.exports = {
         createdAt: '2024-11-01 00:00:00'
       },
       {
-        user_id:1,
-        role_id:1,
+        user_id:2,
+        role_id:2,
         createdAt: '2024-11-01 00:00:00'
       },
     ]);
