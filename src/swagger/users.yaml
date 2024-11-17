@@ -1,0 +1,44 @@
+paths:
+  /api/users/all:
+    get:
+      tags:               
+        - User            
+      summary: All users.
+      description: Obtener todos los usuarios
+      responses:
+        "200":
+          description: Ok
+          content:
+             application/json:
+                schema:
+                  $ref: "#/definitions/UserResponse"
+        "401":
+          description: Authentication failed
+
+definitions:
+    UserResponse:
+        type: object
+        properties:
+          id:
+            type: number
+          username:
+            type: string
+          email:
+            type: string
+          firstname:
+            type: string
+          lastname:
+            type: string
+          cuil:
+            type: string
+          client_id:
+            type: number
+          status:
+            type: number
+ 
+      
+    Token:
+        type: object
+        properties:
+          token:
+            type: string

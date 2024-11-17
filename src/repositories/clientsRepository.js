@@ -1,4 +1,3 @@
-'use strict'
 const  Client  = require('../models').Clients;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -43,7 +42,7 @@ const getClientByCUIT = async (data) =>
 
 const getClients = async () =>
     {
-      return Client.findAll()
+      return await User.Client({attributes:['id','company_name','cuit','status']})
     };
 
 const updateClient = async (data) => {

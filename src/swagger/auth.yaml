@@ -1,0 +1,58 @@
+
+paths:
+  /api/auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login.
+      description: Login by FormBody
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+              schema:
+                $ref: "#/definitions/Login"
+
+      responses:
+        "200":
+          description: Ok
+        "401":
+          description: Authentication failed
+
+  /api/auth/verifyToken:
+    post:
+      tags:
+        - Auth
+      summary: verifyToken.
+      description: Verify received token
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: "#/definitions/Token"
+
+      responses:
+        "200":
+          description: Ok
+        "401":
+          description: Authentication failed
+
+
+definitions:
+    Login:
+        type: object
+        properties:
+            username:
+              type: string
+            password:
+              type: string
+    
+    Token:
+        type: object
+        properties:
+            token:
+              type: string
+                

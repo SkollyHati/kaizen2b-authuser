@@ -101,7 +101,7 @@ const getUserByCUIT = async (data) =>
 
 const getUsers = async () =>
     {
-      return User.findAll()
+      return await User.findAll({attributes:['id','username','email','firstname','lastname','cuil','client_id','status']})
     };
 
 const updateUser = async (data) => {

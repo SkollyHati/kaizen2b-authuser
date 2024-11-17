@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "root_1234",
-    "database": "kaizenbi-users",
+    "database": "kzn_datawarehouse",
     "host": "localhost",
     "port":3307,
     "dialect": "mysql"

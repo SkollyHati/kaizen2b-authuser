@@ -3,8 +3,8 @@ const UserRepository = require('../repositories/usersRepository');
 // Users Logic
 async function getUsers(req, res){
   try {
-    let userlist = await User.findAll();
-    return res.status(200).json({userlist})
+    let data = await UserRepository.getUsers();
+    return res.status(200).send(data)
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });
   }

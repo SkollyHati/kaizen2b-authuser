@@ -2,8 +2,8 @@ const ClientRepository = require('../repositories/clientsRepository');
 
 async function getClients(req, res){
   try {
-    let Clientlist = await Client.findAll();
-    return res.status(200).json({Clientlist})
+    let data = await ClientRepository.getClients();
+    return res.status(200).send(data)
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });
   }

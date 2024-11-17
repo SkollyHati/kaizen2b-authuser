@@ -16,12 +16,19 @@ router.use(express.json());
  *              type: string
  *            password:
  *              type: string
+ *     
+ *     Token:
+ *         type: object
+ *         properties:
+ *            token:
+ *              type: string
+ *                 
  */
 
 /**
  * @swagger
  *
- * /api/v1/auth/login:
+ * /api/auth/login:
  *   post:
  *     summary: Login.
  *     description: Login by FormBody
@@ -38,36 +45,31 @@ router.use(express.json());
  *         description: Ok
  *       "401":
  *         description: Authentication failed
- */
+ *
+  * /api/auth/verifyToken:
+  *   post:
+  *     summary: verifyToken.
+  *     description: Verify received token
+  *
+  *     requestBody:
+  *       required: true
+  *       content:
+  *         application/json:
+  *            schema:
+  *               $ref: "#/definitions/Token"
+  *
+  *     responses:
+  *       "200":
+  *         description: Ok
+  *       "401":
+  *         description: Authentication failed
+  */
 
 router.post('/login', async (req,res) => {
    return await Controller.authuser(req,res);
 });
 
 
-/**
- * @swagger
- *
- * /api/v1/auth/verifyToken:
- *   post:
- *     produces:
- *       - application/json
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *            schema:
- *                type: object
- *                properties:
- *                   token: string
- *
- *     responses:
- *       "200":
- *         description: Ok
- *       "400":
- *         description: Invalid Token
- *
- */
 router.post("/verifyToken", async (req, res) => {
   return await Controller.verifyToken(req,res);
 });

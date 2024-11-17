@@ -1,0 +1,29 @@
+paths:
+  /api/clients/all:
+    get:
+      tags:               
+        - Client            
+      summary: All clients.
+      description: Obtener todos los usuarios
+      responses:
+        "200":
+          description: Ok
+          content:
+             application/json:
+                schema:
+                  $ref: "#/definitions/ClientResponse"
+        "401":
+          description: Authentication failed
+
+definitions:
+  ClientResponse:
+          type: object
+          properties:
+            id:
+              type: number
+            company_name:
+              type: string
+            cuit:
+              type: string
+            status:
+              type: number
