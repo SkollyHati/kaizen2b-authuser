@@ -15,6 +15,7 @@ const getUserById = async (data) =>
     id: userfind.id,
     username: userfind.username,
     firstname: userfind.firstname,
+    email: userfind.email,
     lastname: userfind.lastname,
     cuil: userfind.cuil,
     client: {

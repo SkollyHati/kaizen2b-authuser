@@ -15,6 +15,9 @@ async function authuser(req, res){
     if (!usuario) {
       return res.status(400).json({ message: "Usuario o clave inválidos" });
     }
+    if(usuario.status == 0){
+      return res.status(400).json({message: "Usuario inactivo"})
+    }
     await correctPassword(req.body.password, usuario.password).then(valid => validPassword=valid)
     if(!validPassword){
       return res.status(400).json({ message: "Clave incorrecta" });

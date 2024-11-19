@@ -42,7 +42,13 @@ const getClientByCUIT = async (data) =>
 
 const getClients = async () =>
     {
-      return await User.Client({attributes:['id','company_name','cuit','status']})
+      try  {
+        return await Client.findAll({attributes:['id','company_name','cuit','status']})
+              }
+        catch(e){
+          return (e);
+        }
+
     };
 
 const updateClient = async (data) => {
